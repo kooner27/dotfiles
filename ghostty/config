@@ -42,11 +42,13 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-# font-family = "D2Coding"
-# font-style = "Bold"
-
-font-family = "JetBrainsMonoNL NFM"
+font-family = "D2Coding"
 font-style = "Bold"
+font-size = 20
+
+# font-family = "JetBrainsMonoNL NFM"
+# font-style = "Bold"
+# font-size = 16
 
 # font-family-bold = "JetBrainsMonoNL NFM Bold"
 # font-family-italic = "JetBrainsMonoNL NFM Semibold"
@@ -54,7 +56,7 @@ font-style = "Bold"
 font-synthetic-style = false
 
 
-font-size = 16
 theme = "catppuccin-mocha"
 window-decoration = false
 cursor-text = "#000000"
+
