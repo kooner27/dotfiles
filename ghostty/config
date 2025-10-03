@@ -56,7 +56,10 @@ font-size = 19
 font-synthetic-style = false
 
 
-theme = "catppuccin-mocha"
+theme = "Catppuccin Mocha"
+# theme = "gruvbox-material"
+# theme = "GruvboxDark"
+# theme = "GruvboxDarkHard"
 window-decoration = false
 cursor-text = "#000000"
 
