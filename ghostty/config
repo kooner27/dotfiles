@@ -43,7 +43,7 @@
 # resize-overlay-duration = 4s 200ms
 
 font-family = "D2Coding"
-font-style = "Bold"
+# font-style = "Bold"
 font-size = 19
 
 # font-family = "JetBrainsMonoNL NFM"
@@ -56,10 +56,12 @@ font-size = 19
 font-synthetic-style = false
 
 
-theme = "Catppuccin Mocha"
+# theme = "Catppuccin Mocha"
+theme = Gruvbox Material Dark
 # theme = "gruvbox-material"
 # theme = "GruvboxDark"
 # theme = "GruvboxDarkHard"
 window-decoration = false
 cursor-text = "#000000"
+keybind = ctrl+backspace=text:\x17
 
