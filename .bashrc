@@ -115,19 +115,66 @@ if ! shopt -oq posix; then
   fi
 fi
 
-code() {
-  nohup env OZONE_PLATFORM=wayland \
-    ELECTRON_ENABLE_OZONE=1 \
-    WAYLAND_DISPLAY=wayland-0 \
-    /usr/share/code/code \
-    --enable-features=WaylandWindowDecorations,UseOzonePlatform \
-    --ozone-platform=wayland "$@" >/dev/null 2>&1 &
-}
+# code() {
+#   nohup env OZONE_PLATFORM=wayland \
+#     ELECTRON_ENABLE_OZONE=1 \
+#     WAYLAND_DISPLAY=wayland-0 \
+#     /usr/share/code/code \
+#     --enable-features=WaylandWindowDecorations,UseOzonePlatform \
+#     --ozone-platform=wayland "$@" >/dev/null 2>&1 &
+# }
 
 ### stuff i added
+
+# fzf
+
+# --- Full Featured FZF Ctrl-R Replacement ---
+fzf-history-widget() {
+  # Build the list of history commands:
+  # - strip history numbers
+  # - reverse (most recent first)
+  # - dedupe while keeping newest version
+  local selected
+  selected=$(
+    history |
+      sed 's/^ *[0-9]* *//' |
+      tac |
+      awk '!seen[$0]++' |
+      fzf \
+        --height=60% \
+        --layout=reverse \
+        --border \
+        --ansi \
+        --prompt="History > " \
+        --preview 'echo {}' \
+        --preview-window=down:3:wrap \
+        --bind 'ctrl-d:preview-half-page-down' \
+        --bind 'ctrl-u:preview-half-page-up' \
+        --bind 'enter:accept'
+  )
+
+  # If you picked something, insert into the prompt
+  if [[ -n "$selected" ]]; then
+    READLINE_LINE="$selected"
+    READLINE_POINT=${#READLINE_LINE}
+  fi
+}
+
+# Ctrl-R triggers the widget
+bind -x '"\C-r": fzf-history-widget'
+
+# fzf
+
+export EDITOR=nvim
+export VISUAL=nvim
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 PS1=$'\[\e[32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ '
 # PS1=$'\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ '
+. "$HOME/.cargo/env"
+
+# Created by `pipx` on 2025-11-13 04:32:36
+export PATH="$PATH:/home/k/.local/bin"
